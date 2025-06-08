@@ -1,0 +1,8 @@
+inicialmente rodar as extensões necessárias que a professora passou, pois fizemos via IntelliJ e não usamos a ide do Eclipse, tentamos usar a que vinha na maquina da PUC, porem o Java presente na maquina era o 7, e precisávamos de outra versão e nada que fazíamos nas nossas maquinas fazia aquilo rodar.
+Nosso colega de sala Paulo Vitor, nos mostrou um site que poderíamos baixar um arquivo com as 3 extinções que a professora passou, já funcionando e nas versões mais recentes, baixamos e colocamos na IDE do intelliJ e só foi necessário acertar a versão do Java, sendo a 21 a usada no projeto, e após sofrer um pouco pra sincronizar com o banco finalmente estava criando o exemplo de biblioteca passado pela professora.
+
+Depois desse sofrimento inicial, o próximo foi entender como funcionava a estrutura de arquivos, mas isso não demorou muito a ser entendido, depois disso demoramos pra fazer o diagrama de classes pois estávamos nos confundindo nas questões de cardinalidades oque é de extrema importância nesse trabalho devido pra poder informar ao java oq é fk e de onde ela vem, apos arrumar o diagrama com a professora, fomos seguindo os exemplos de código e como estruturar e logo saiu a primeira tabela desse projeto de "puc-jogos", com isso a feramenta engatou e logo tudo estava estruturado.
+
+Depois disso foi tentar fazer insert, na primeira tabela, foi tranquilo igual ao CRUD completo, exceto por parte do Delete, que deu uma dor de cabeça na hora de montar um único código pra fazer todo o CRUD, pois algumas referencias que deletávamos acabávamos chamando em outros momentos, oque causava erros pois o elemento não existia mais, e com isso sofremos um pouco mais.
+
+Mas após dominar como fazer o delete nos códigos, o trabalho fluiu tranquilamente.
