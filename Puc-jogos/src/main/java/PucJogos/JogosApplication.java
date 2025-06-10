@@ -122,7 +122,7 @@ public class JogosApplication implements CommandLineRunner {
                     " - Horas: " + b1.getHorasJogadas());
         }
 
-        //pausar(scanner);
+        pausar(scanner);
 
         // UPDATE
         Optional<Biblioteca> bOptional = bibliotecaRepository.findById(novaBiblioteca.getBibliotecaId());
@@ -132,7 +132,7 @@ public class JogosApplication implements CommandLineRunner {
             bibliotecaRepository.save(b2);
         }
 
-        //pausar(scanner);
+        pausar(scanner);
 
         System.out.println("\n=== CRUD de Review ===");
 
@@ -172,7 +172,7 @@ public class JogosApplication implements CommandLineRunner {
         System.out.println("Review atualizada com sucesso.");
 
 
-        //pausar(scanner);
+        pausar(scanner);
 
         System.out.println("\n=== CRUD de Amigos ===");
 
@@ -191,7 +191,7 @@ public class JogosApplication implements CommandLineRunner {
             System.out.println("ID: " + a.getAmizadeId() + " | De: " + a.getUser1().getNome() + " -> Para: " + a.getUser2().getNome() + " | Status: " + (a.isStatus() ? "Aceito" : "Recusado"));
         }
 
-        //pausar(scanner);
+        pausar(scanner);
 
         // --- UPDATE: alterar status de uma amizade ---
         Amigos amizadeExistente = amigosRepository.findById(1).orElse(null);
@@ -201,7 +201,7 @@ public class JogosApplication implements CommandLineRunner {
             System.out.println("Amizade ID 1 foi atualizada para recusada.");
         }
 
-        //pausar(scanner);
+        pausar(scanner);
 
         System.out.println("\n=== CRUD de Conquista ===");
 
@@ -226,7 +226,7 @@ public class JogosApplication implements CommandLineRunner {
                     " | Jogo: " + conquista.getJogo().getTitulo());
         }
 
-        //pausar(scanner);
+        pausar(scanner);
 
         // --- UPDATE CONQUISTA ---
         Conquista cUpdate = conquistaRepository.findById(1).orElse(null);
@@ -236,7 +236,7 @@ public class JogosApplication implements CommandLineRunner {
             System.out.println("Conquista atualizada.");
         }
 
-        //pausar(scanner);
+        pausar(scanner);
 
         System.out.println("\n=== CRUD de Transacao ===");
 
@@ -251,7 +251,7 @@ public class JogosApplication implements CommandLineRunner {
             System.out.println("Transação criada.");
         }
 
-        //pausar(scanner);
+        pausar(scanner);
 
         // --- LISTAR TRANSACOES ---
         System.out.println("Transações registradas:");
@@ -264,7 +264,7 @@ public class JogosApplication implements CommandLineRunner {
                     " | Biblioteca: " + t.getBiblioteca().getBibliotecaId());
         }
 
-        //pausar(scanner);
+        pausar(scanner);
 
         // --- UPDATE TRANSACAO ---
         Transacao tUpdate = transacaoRepository.findById(1).orElse(null);
