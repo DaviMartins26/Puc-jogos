@@ -51,8 +51,11 @@ public class JogosApplication implements CommandLineRunner {
 
         // CREATE
         Usuario novoUsuario = new Usuario("Adilson", "Adilson@gmail.com", "123", 50.0f);
+        Usuario userDelete = new Usuario("Jurandir","jurandir@email.com","321",2050.0f);
         usuarioRepository.save(novoUsuario);
+        usuarioRepository.save(userDelete);
         System.out.println("Usuário criado: " + novoUsuario.getUserId());
+        System.out.println("Usuário criado: " + userDelete.getUserId());
 
         // READ
         List<Usuario> usuarios = usuarioRepository.findAll();
@@ -61,8 +64,7 @@ public class JogosApplication implements CommandLineRunner {
             System.out.println(u.getUserId() + " - " + u.getNome() + " - " + u.getEmail());
         }
 
-        System.out.println("\nPressione ENTER para continuar para a próxima parte...");
-        scanner.nextLine(); // Isso vai pausar a execução até o usuário pressionar Enter
+     //   pausar(scanner);
 
         // UPDATE
         Optional<Usuario> usuarioUpdate = usuarioRepository.findById(novoUsuario.getUserId());
@@ -73,57 +75,44 @@ public class JogosApplication implements CommandLineRunner {
             System.out.println("Usuário atualizado: " + updateUser.getUserId() + " - novo saldo: " + updateUser.getSaldo());
         }
 
-        System.out.println("\nPressione ENTER para continuar para a próxima parte...");
-        scanner.nextLine(); // Isso vai pausar a execução até o usuário pressionar Enter
-
-        // DELETE
-        /*
-        usuarioRepository.deleteById(novoUsuario.getUserId());
-        System.out.println("Usuário deletado.");
-
-        System.out.println("\nPressione ENTER para continuar para a próxima parte...");
-        scanner.nextLine(); // Isso vai pausar a execução até o usuário pressionar Enter
-         */
+     //   pausar(scanner);
 
         System.out.println("\n=== CRUD de Jogo ===");
 
         //Create
-        Jogo novoJogo = new Jogo("Dark Souls", "FromSoftware", 199.99f);
-        jogoRepository.save(novoJogo);
+        Jogo novoJogo1 = new Jogo("Dark Souls", "FromSoftware", 199.99f);
+        Jogo novoJogo2 = new Jogo("Mario 64 4k", "Nintendo", 500.00f);
+        jogoRepository.save(novoJogo1);
+        jogoRepository.save(novoJogo2);
 
         //Querry
         List<Jogo> jogos = jogoRepository.findAll();
+        System.out.println("Jogos no DataBase");
         for (Jogo j : jogos) {
             System.out.println(j.getJogoId() + " - " + j.getTitulo());
         }
 
-        System.out.println("\nPressione ENTER para continuar para a próxima parte...");
-        scanner.nextLine(); // Isso vai pausar a execução até o usuário pressionar Enter
+     //   pausar(scanner);
 
         //Update
-        Optional<Jogo> jogoOptional = jogoRepository.findById(novoJogo.getJogoId());
+        Optional<Jogo> jogoOptional = jogoRepository.findById(novoJogo1.getJogoId());
         if (jogoOptional.isPresent()) {
-            Jogo j2 = jogoOptional.get();
-            j2.setPreco(149.99f);
-            jogoRepository.save(j2);
+            Jogo jogo1 = jogoOptional.get();
+            jogo1.setPreco(149.99f);
+            jogoRepository.save(jogo1);
+            System.out.println("Preço atualizado: " + jogo1.getJogoId() + " - novo Preço: " + jogo1.getPreco());
         }
 
-        //DELETE
-
-        System.out.println("\nPressione ENTER para continuar para a próxima parte...");
-        scanner.nextLine(); // Isso vai pausar a execução até o usuário pressionar Enter
-        /*
-        jogoRepository.deleteById(novoJogo.getJogoId());
-
-        System.out.println("\nPressione ENTER para continuar para a próxima parte...");
-        scanner.nextLine(); // Isso vai pausar a execução até o usuário pressionar Enter
-        */
+       // pausar(scanner);
 
         System.out.println("\n=== CRUD de Biblioteca ===");
 
         //  CREATE
-        Biblioteca novaBiblioteca = new Biblioteca(novoUsuario, novoJogo, 12, new Date());
+        Biblioteca novaBiblioteca = new Biblioteca(novoUsuario, novoJogo1, 12, new Date());
+        Biblioteca deleteBiblioteca = new Biblioteca(novoUsuario,novoJogo2,8001,new Date());
         bibliotecaRepository.save(novaBiblioteca);
+        bibliotecaRepository.save(deleteBiblioteca);
+        System.out.println("Bibliotecas Criadas");
 
         // READ
         List<Biblioteca> bibliotecas = bibliotecaRepository.findAll();
@@ -133,8 +122,7 @@ public class JogosApplication implements CommandLineRunner {
                     " - Horas: " + b1.getHorasJogadas());
         }
 
-        System.out.println("\nPressione ENTER para continuar para a próxima parte...");
-        scanner.nextLine(); // Isso vai pausar a execução até o usuário pressionar Enter
+        //pausar(scanner);
 
         // UPDATE
         Optional<Biblioteca> bOptional = bibliotecaRepository.findById(novaBiblioteca.getBibliotecaId());
@@ -144,28 +132,25 @@ public class JogosApplication implements CommandLineRunner {
             bibliotecaRepository.save(b2);
         }
 
-        System.out.println("\nPressione ENTER para continuar para a próxima parte...");
-        scanner.nextLine(); // Isso vai pausar a execução até o usuário pressionar Enter
-
-        // DELETE
-        /*
-        bibliotecaRepository.deleteById(novaBiblioteca.getBibliotecaId());
-         */
-
-        System.out.println("\nPressione ENTER para continuar para a próxima parte...");
-        scanner.nextLine(); // Isso vai pausar a execução até o usuário pressionar Enter
+        //pausar(scanner);
 
         System.out.println("\n=== CRUD de Review ===");
 
         //Criar
+        //Pegando Instancias de objetos dentro do banco
         Usuario usuarioReview = usuarioRepository.findById(1).orElse(null);
-        Jogo jogoReview = jogoRepository.findById(2).orElse(null);
+        Jogo jogoReview = jogoRepository.findById(1).orElse(null);
 
+
+        // teste pq tada dando erro
         if (usuarioReview != null && jogoReview != null) {
             Review novaReview = new Review(usuarioReview, jogoReview, 8, true);
             reviewRepo.save(novaReview);
             System.out.println("Review criada com ID: " + novaReview.getReviewId());
         }
+        Review novaReview2 = new Review(usuarioReview, jogoReview, 8, true);
+        reviewRepo.save(novaReview2);
+        System.out.println("Review criada com ID: " + novaReview2.getReviewId());
 
         // READ
         System.out.println("Listando todas as reviews:");
@@ -177,30 +162,17 @@ public class JogosApplication implements CommandLineRunner {
                     " | Recomenda: " + r.isRecomenda());
         }
 
-        System.out.println("\nPressione ENTER para continuar para a próxima parte...");
-        scanner.nextLine(); // Isso vai pausar a execução até o usuário pressionar Enter
+       // pausar(scanner);
 
         //UPDATE
         Review reviewExistente = reviewRepo.findById(1).orElse(null);
-        if (reviewExistente != null) {
-            reviewExistente.setNota(10);
-            reviewExistente.setRecomenda(false);
-            reviewRepo.save(reviewExistente);
-            System.out.println("Review atualizada com sucesso.");
-        }
+        reviewExistente.setNota(10);
+        reviewExistente.setRecomenda(false);
+        reviewRepo.save(reviewExistente);
+        System.out.println("Review atualizada com sucesso.");
 
-        System.out.println("\nPressione ENTER para continuar para a próxima parte...");
-        scanner.nextLine(); // Isso vai pausar a execução até o usuário pressionar Enter
 
-        // DELETE
-        /*
-        if (reviewRepo.existsById(2)) {
-            reviewRepo.deleteById(2);
-            System.out.println("Review deletada com Sucesso.");
-        }
-        */
-        System.out.println("\nPressione ENTER para continuar para a próxima parte...");
-        scanner.nextLine(); // Isso vai pausar a execução até o usuário pressionar Enter
+        //pausar(scanner);
 
         System.out.println("\n=== CRUD de Amigos ===");
 
@@ -208,11 +180,10 @@ public class JogosApplication implements CommandLineRunner {
         Usuario usuarioAmigo1 = usuarioRepository.findById(1).orElse(null);
         Usuario usuarioAmigo2 = usuarioRepository.findById(2).orElse(null);
 
-        if (usuarioAmigo1 != null && usuarioAmigo2 != null) {
-            Amigos amizade = new Amigos(usuarioAmigo1, usuarioAmigo2, true); // Aceita
-            amigosRepository.save(amizade);
-            System.out.println("Amizade criada entre " + usuarioAmigo1.getNome() + " e " + usuarioAmigo2.getNome());
-        }
+        Amigos amizade = new Amigos(usuarioAmigo1, usuarioAmigo2, true); // Aceita
+        amigosRepository.save(amizade);
+        System.out.println("Amizade criada entre " + usuarioAmigo1.getNome() + " e " + usuarioAmigo2.getNome());
+
 
         // --- LER TODAS AS AMIZADES ---
         System.out.println("Lista de amizades:");
@@ -220,8 +191,7 @@ public class JogosApplication implements CommandLineRunner {
             System.out.println("ID: " + a.getAmizadeId() + " | De: " + a.getUser1().getNome() + " -> Para: " + a.getUser2().getNome() + " | Status: " + (a.isStatus() ? "Aceito" : "Recusado"));
         }
 
-        System.out.println("\nPressione ENTER para continuar para a próxima parte...");
-        scanner.nextLine(); // Isso vai pausar a execução até o usuário pressionar Enter
+        //pausar(scanner);
 
         // --- UPDATE: alterar status de uma amizade ---
         Amigos amizadeExistente = amigosRepository.findById(1).orElse(null);
@@ -231,43 +201,32 @@ public class JogosApplication implements CommandLineRunner {
             System.out.println("Amizade ID 1 foi atualizada para recusada.");
         }
 
-        System.out.println("\nPressione ENTER para continuar para a próxima parte...");
-        scanner.nextLine(); // Isso vai pausar a execução até o usuário pressionar Enter
-
-        // --- DELETE: remover amizade ---
-        /*
-        if (amizadeExistente != null) {
-            amigosRepository.delete(amizadeExistente);
-            System.out.println("Amizade ID 1 removida.");
-        }
-
-        System.out.println("\nPressione ENTER para continuar para a próxima parte...");
-        scanner.nextLine(); // Isso vai pausar a execução até o usuário pressionar Enter
-        */
+        //pausar(scanner);
 
         System.out.println("\n=== CRUD de Conquista ===");
 
         // --- CRIAR CONQUISTA ---
-        Usuario userConquista = usuarioRepository.findById(4).orElse(null);
-        Jogo JogoConquista = jogoRepository.findById(2).orElse(null);
+        Usuario userConquista = usuarioRepository.findById(1).orElse(null);
+        Jogo JogoConquista = jogoRepository.findById(1).orElse(null);
 
-        if (userConquista != null && JogoConquista != null) {
-            Conquista c = new Conquista("Explorador Mestre", "Descobriu todas as áreas secretas", userConquista, JogoConquista);
-            conquistaRepository.save(c);
-            System.out.println("Conquista criada para " + userConquista.getNome());
-        }
+        Conquista c = new Conquista("Explorador Mestre", "Descobriu todas as áreas secretas", userConquista, JogoConquista);
+        Conquista c2 = new Conquista("Ao Resgate", "Resgatou todos os personagens", userConquista, JogoConquista);
+        conquistaRepository.save(c);
+        System.out.println("Conquista criada para " + userConquista.getNome());
+        conquistaRepository.save(c2);
+        System.out.println("Conquista criada para " + userConquista.getNome());
+
 
         // --- LISTAR CONQUISTAS ---
         System.out.println("Conquistas cadastradas:");
-        for (Conquista c : conquistaRepository.findAll()) {
+        for (Conquista conquista : conquistaRepository.findAll()) {
             System.out.println("ID: " + c.getIdConquista() + " | " + c.getNome() +
-                    " - " + c.getDescricao() +
+                    " - " + conquista.getDescricao() +
                     " | Usuário: " + c.getUsuario().getNome() +
-                    " | Jogo: " + c.getJogo().getTitulo());
+                    " | Jogo: " + conquista.getJogo().getTitulo());
         }
 
-        System.out.println("\nPressione ENTER para continuar para a próxima parte...");
-        scanner.nextLine(); // Isso vai pausar a execução até o usuário pressionar Enter
+        //pausar(scanner);
 
         // --- UPDATE CONQUISTA ---
         Conquista cUpdate = conquistaRepository.findById(1).orElse(null);
@@ -277,26 +236,13 @@ public class JogosApplication implements CommandLineRunner {
             System.out.println("Conquista atualizada.");
         }
 
-        System.out.println("\nPressione ENTER para continuar para a próxima parte...");
-        scanner.nextLine(); // Isso vai pausar a execução até o usuário pressionar Enter
-
-        // --- DELETE CONQUISTA ---
-        /*
-        Conquista conquistaDelete = conquistaRepository.findById(1).orElse(null);
-        if (conquistaDelete != null) {
-            conquistaRepository.delete(conquistaDelete);
-            System.out.println("Conquista deletada.");
-        }
-
-        System.out.println("\nPressione ENTER para continuar para a próxima parte...");
-        scanner.nextLine(); // Isso vai pausar a execução até o usuário pressionar Enter
-        */
+        //pausar(scanner);
 
         System.out.println("\n=== CRUD de Transacao ===");
 
         // --- CRIAR TRANSACAO ---
-        Usuario userTransacao = usuarioRepository.findById(2).orElse(null);
-        Jogo jogoTransacao = jogoRepository.findById(3).orElse(null);
+        Usuario userTransacao = usuarioRepository.findById(1).orElse(null);
+        Jogo jogoTransacao = jogoRepository.findById(1).orElse(null);
         Biblioteca BiblioTransacao = bibliotecaRepository.findById(1).orElse(null);
 
         if (userTransacao != null && jogoTransacao != null && BiblioTransacao != null) {
@@ -305,8 +251,7 @@ public class JogosApplication implements CommandLineRunner {
             System.out.println("Transação criada.");
         }
 
-        System.out.println("\nPressione ENTER para continuar para a próxima parte...");
-        scanner.nextLine(); // Isso vai pausar a execução até o usuário pressionar Enter
+        //pausar(scanner);
 
         // --- LISTAR TRANSACOES ---
         System.out.println("Transações registradas:");
@@ -319,8 +264,7 @@ public class JogosApplication implements CommandLineRunner {
                     " | Biblioteca: " + t.getBiblioteca().getBibliotecaId());
         }
 
-        System.out.println("\nPressione ENTER para continuar para a próxima parte...");
-        scanner.nextLine(); // Isso vai pausar a execução até o usuário pressionar Enter
+        //pausar(scanner);
 
         // --- UPDATE TRANSACAO ---
         Transacao tUpdate = transacaoRepository.findById(1).orElse(null);
@@ -330,19 +274,60 @@ public class JogosApplication implements CommandLineRunner {
             System.out.println("Transação atualizada.");
         }
 
-        System.out.println("\nPressione ENTER para continuar para a próxima parte...");
-        scanner.nextLine(); // Isso vai pausar a execução até o usuário pressionar Enter
+        pausar(scanner);
+
+        System.out.println("-------Momento dos DELETES---------");
+
+        pausar(scanner);
 
         // --- DELETE TRANSACAO ---
-        /*
         Transacao tDelete = transacaoRepository.findById(1).orElse(null);
         if (tDelete != null) {
             transacaoRepository.delete(tDelete);
             System.out.println("Transação deletada.");
         }
-        */
+
+        // --- DELETE CONQUISTA ---
+        Conquista conquistaDelete = conquistaRepository.findById(1).orElse(null);
+        if (conquistaDelete != null) {
+            conquistaRepository.delete(conquistaDelete);
+            System.out.println("Conquista deletada.");
+        }
+
+        // --- DELETE: remover amizade ---
+        if (amizadeExistente != null) {
+            amigosRepository.delete(amizadeExistente);
+            System.out.println("Amizade ID 1 removida.");
+        }
+
+
+        // DELETE REVIEW
+        reviewRepo.deleteById(2);
+        System.out.println("Review deletada com Sucesso.");
+
+        // DELETE Biblioteca
+        bibliotecaRepository.deleteById(deleteBiblioteca.getBibliotecaId());
+        System.out.println("Biblioteca Deletada");
+
+
+        //DELETE Jogo
+        jogoRepository.deleteById(2);
+        System.out.println("Jogo Deletado");
+
+        //DELETE Usuario
+        Usuario deletarUsuario = usuarioRepository.findById(2).orElse(null);
+        if (deletarUsuario != null){
+        usuarioRepository.delete(deletarUsuario);
+        System.out.println("Usuário deletado.");
+        }
+
         scanner.close();
         System.out.println("Fim dos CRUD");
-        System.exit(1); // pro sistema parar pq ta em loop
+        System.exit(0); // pro sistema parar pq ta em loop
+    }
+    // Método auxiliar para pausar a execução
+    private void pausar(Scanner scanner) {
+        System.out.println("\nPressione ENTER para continuar para a próxima parte...");
+        scanner.nextLine();
     }
 }
