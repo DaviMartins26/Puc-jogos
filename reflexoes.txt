@@ -5,4 +5,6 @@ Depois desse sofrimento inicial, o próximo foi entender como funcionava a estru
 
 Depois disso foi tentar fazer insert, na primeira tabela, foi tranquilo igual ao CRUD completo, exceto por parte do Delete, que deu uma dor de cabeça na hora de montar um único código pra fazer todo o CRUD, pois algumas referencias que deletávamos acabávamos chamando em outros momentos, oque causava erros pois o elemento não existia mais, e com isso sofremos um pouco mais.
 
-Mas após dominar como fazer o delete nos códigos, o trabalho fluiu tranquilamente.
+Mas após dominar como fazer o delete nos códigos, o trabalho fluiu tranquilamente, porem dominar o delete foi um problema,visto que não poderiamos so pedir pra apagar algo que estava referenciado em outra tabela, então tivemos que identificar e mudar alguns registros, pra colocar delete apenas no final do codigo para mostrar no final da apresentação do codigo, assim teriamos certeza que nada iria quebrar o funcionamento do codigo.
+
+Optamos por fazer um codigo Monolito grande pra facilitar a apresentação e entendimento, visto que em uma boa pratica iriamos separar as coisas por clases e ficariamos chamando ela, assim fica mais facil explicar ao nosso ver.
